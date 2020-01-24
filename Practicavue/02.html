@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Clases Dinamicas con Vue</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" 
+    integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+</head>
+<body>
+    <div id="app" class="container mt-5"><!--Clase de bootstrap-->
+
+        <div :class="['padding-3','text-white',fondo]"> <!--Esto es un arreglo que le estamos pasando clases especificas de Bootstrap con una varibale-->
+            <!--Clase de bootstrap-->
+            <!--
+                :class los dos puntos se ponen porque se esta validnado con una clase de vue  
+                :class="['padding-3','text-white',fondo]" aqui estoy usando bootstrap le estoy dando un padding 
+                un color de texto y estoy instanciando a una clase que cree en el js
+                si se quiere dar varias propiedades en una sola clase como eneste caso se debe de poner 
+                "[]" //// se ponen los corchtes cuando son varios
+                y si solo se quiere poner una propiedad solo se pone entre ""
+                NOTA: como se esta implementando por medio de Vue para que funcione se debe poner entre comillas simples
+                EJEMPLO " 'padding-3' " Debe ir con comillas dobles y encerrado con comillas simples
+            -->
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Non, aut a, enim provident 
+                necessitatibus quod obcaecati inventore reprehenderit, odit quas doloribus! 
+                Voluptates ea maiores vitae non! Illum totam doloremque officiis!
+            </p>
+        </div>
+        <input type="text" class="form-control my-3" v-model="fondo">
+        <div class="text-white p-3" :class="{'bg-info' :color, 'bg-success' :!color}">
+        <!--Aqui en elbg-info :color esta evaluando a la variable color que este en js 
+            y si es verdadero lo pinta de color azul
+            bg-success es un color verde 
+            'bg-success' :!color aqui le esta diciendo que cambiara el fondo a verde solo cuando el evento suceda
+        -->
+            <p>
+                Lorem ipsum dolor sit, amet consectetur adipisicing elit. Esse saepe rem vitae odio 
+                tenetur libero dignissimos ut. Pariatur neque eligendi amet aspernatur, blanditiis 
+                quos eveniet at, ipsum, recusandae ullam itaque.
+            </p>
+        </div>
+        <button class="btn btn-primary" @click="color= !color">Cambiar</button>
+        <!--
+            Este boton es la clave ya que al darle click al boton cambia de true a false el color
+            por lo tanto cambia de azul a verde
+            y viceversa
+        -->
+
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <!--Libreria Para Usar Vue-->
+    <script src="02.js"></script><!--Instancia del js-->
+</body>
+</html>

@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Hola Mundo Con Vue</title>
+</head>
+<body>
+    <!--
+        {{ejemplo}} // ESTo es conocido como interpolación es muy usado en vue para traer datos desde javascript
+        ejemplo vendria siendo el dato que se recupera desde js
+
+        v-for vendria siendo el for convencional de vue con mas poder a la hora de extraer datos
+        v-if es el if que utiliza vue
+        v-model es un metodo que te ayuda a sobreescribir cierto dato que esta en el javascript, en este caso 
+        atrapa lo que esta en el cuadro de texto, y sobreescribe la nueva fruta
+        v-on:click es el evente on click en vue o puede ser sustituido por @click es exactamente igual
+        @keyup.ejemplo sirve para jugar con los eventos del teclado y controlar sus acciones con vue
+        ejemplo algunos muy comunes son el evento .enter y el .delete o el .ctrl que son eventos del teclado asignados por vue
+    -->
+    
+    <div id="app">
+        <h1>{{titulo}}</h1>
+
+        <input type="text"v-model="NuevaFruta" @keyup.enter="AgregarFruta">
+        <!--
+            En pocas palabras lo que se le mete al cuadro de texto, es recibido con el comando v-model 
+            y sobreescibe el dato que esta en el js
+            NOTA: para poder vizualizar el contenido de nueva fruta en el navegador se debe trabajar en consola
+            y escribir el siguiente comando: app.NuevaFruta ENTER 
+            Sigifica que esta instanciando en el div de app, pero busca el dato en el js y muestra el valor en consola
+        -->
+        
+        <button @click="AgregarFruta">Agregar</button>
+        <!--
+            @click puede ser sustiduido por v-on:click pero es mas comodo el primer termino
+        -->
+
+
+        <ul>
+            <li v-for="fruta of frutas"> 
+                <!-- si ponemos esto fuera {{fruta}} aqui pinta todo si quiseramos 
+                mostrar algo en especifico ej. solo la cantidad de cada producto deberia de ser:
+                <li v-for="fruta of frutas">{{fruta.cantidad}}</li>
+                ///////////////////////////////////////////////////
+                si queremos ver el nombre y la cantidad sin que se vean las llaves se debe poner así:
+                <li v-for="fruta of frutas">{{fruta.cantidad}} - {{fruta.nombre}}</li>
+                ej mostraria 10 Manzanas
+                5 Peras
+                3 Duraznos etc.
+                -->
+                
+                <input type="number" v-model.number="fruta.cantidad">
+                <!--Esto sirve para poner un cuadro de texto con numeros
+                lo que tenga el arreglo en cantidad, eso es lo que pondrá, y si el usuario ingresa 
+                otro numero lo cambia por el numevo valor
+                se escribe v-model.number para que lo guarde como un nunero en el arreglo ya que si no 
+                el numero se guarda com un string-->
+                
+
+                <button @click="fruta.cantidad++">+</button>
+                <!--
+                    Dentro del @click se puede hacer cualquier operación de js en este caso
+                    cada que se presione el boton de + se ira sumando la cantidad existente de cada fruta +1
+                -->
+
+
+                <span v-if="fruta.cantidad>0"><!--Condiciona si la cantidad es 0 pues no se le puede reducir más al stock y no debe de mostrar el botón-->
+                    <button @click="fruta.cantidad--">-</button>
+                </span>
+                
+
+
+                {{fruta.nombre}} <!--Aqui solo mostraria el nombre de la fruta que esta en el arreglo-->
+                
+                <span v-if="fruta.cantidad ===0"> -Sin Stock</span>
+                <!-- v-if="CONDICION"  Muestra mensaje para cuando la cantidad sea sero-->
+            </li>
+            
+            
+        </ul>
+        <h4>TOTAL {{SumarFrutas}}</h4>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script><!--Libreria Para Usar Vue-->
+    <script src="01.js"></script><!--Instancia del js-->
+</body>
+</html>
